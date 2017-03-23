@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Palpite NBA</string>
+    <string name="cb_manter_conectado">Manter Conectado</string>
+    <string name="btn_logar">Logar</string>
+    <string name="login_hint">Login</string>
+    <string name="login">Login</string>
+    <string name="title_activity_main">Palpites</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="menu_exluir">Excluir</string>
+</resources>
