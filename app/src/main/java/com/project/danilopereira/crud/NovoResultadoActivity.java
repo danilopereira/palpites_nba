@@ -17,6 +17,7 @@ import com.project.danilopereira.crud.com.project.danilopereira.crud.model.Confe
 import com.project.danilopereira.crud.com.project.danilopereira.crud.model.Resultado;
 import com.project.danilopereira.crud.com.project.danilopereira.crud.model.Time;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NovoResultadoActivity extends AppCompatActivity {
@@ -65,8 +66,9 @@ public class NovoResultadoActivity extends AppCompatActivity {
                 spTime1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                        times = removePrimeiroTime(times, spTime1.getSelectedItemPosition());
-                        ArrayAdapter<Time> timeArrayAdapter2 = new ArrayAdapter<Time>(getApplicationContext(), R.layout.conferencia_time, times);
+                        Time timeSelected = (Time) spTime1.getSelectedItem();
+                        List<Time> times2 = removeTimeSelecionado(timeSelected, ((Conferencia) spConferencia.getSelectedItem()).getId());
+                        ArrayAdapter<Time> timeArrayAdapter2 = new ArrayAdapter<Time>(getApplicationContext(), R.layout.conferencia_time, times2);
                         timeArrayAdapter2.setDropDownViewResource(R.layout.conferencia_time);
                         spTime1.setPrompt("");
                         spTime2.setAdapter(timeArrayAdapter2);
@@ -114,8 +116,14 @@ public class NovoResultadoActivity extends AppCompatActivity {
         finish();
     }
 
-    private List<Time> removePrimeiroTime(List<Time> times, int position) {
-        times.remove(position);
+    private List<Time> removeTimeSelecionado(Time timeSelected, int conferenciaId) {
+        List<Time> times = timeDAO.findByConferenciaId(conferenciaId);
+        for(Time time : times){
+            if(time.getId() == timeSelected.getId()){
+                times.remove(times.indexOf(time));
+                break;
+            }
+        }
 
         return times;
     }
